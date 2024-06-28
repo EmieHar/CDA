@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/" >
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des acteurs</title>
+    <link rel="stylesheet" href="/css/liste.css">
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault();
+            const button = event.currentTarget;
+            const acteurId = button.getAttribute('data-acteur-id');
+            const acteurNom = button.getAttribute('data-acteur-nom');
+            const acteurPrenom = button.getAttribute('data-acteur-prenom');
+
+            const confirmation = confirm('Êtes-vous sûr de vouloir supprimer cet acteur : ' + acteurNom + ' ' + acteurPrenom + '?');
+            if (confirmation) {
+                window.location.href = '/acteur/delete/' + acteurId;
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>Liste des acteurs</h1>
+<div th:if="${message}" th:text="${message}" style="color: green;"></div>
+<div th:if="${error}" th:text="${error}" style="color: red;"></div>
+
+<table>
+    <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="acteur : ${acteurs}">
+        <td th:text="${acteur.nom}"></td>
+        <td th:text="${acteur.prenom}"></td>
+        <td>
+            <img th:src="@{'/images/' + ${acteur.photo}}" alt="photo de l'acteur" style="max-width: 100px; max-height: 100px;"/>
+        </td>
+        <td>
+            <a th:href="@{/acteur/update/{id}(id=${acteur.id})}" class="btn btn-primary">Modifier</a>
+            <button class="delete-btn"
+                    th:data-acteur-id="${acteur.id}"
+                    th:data-acteur-nom="${acteur.nom}"
+                    th:data-acteur-prenom="${acteur.prenom}"
+                    onclick="confirmDelete(event)">Supprimer</button>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Mettre à jour un film</title>
+    <link rel="stylesheet" href="/css/form.css">
+
+</head>
+<body>
+<h1>Mettre à jour un film</h1>
+<form th:action="@{/film/update}" th:object="${film}" method="post" enctype="multipart/form-data">
+    <input type="hidden" th:field="*{id}" />
+
+    <label for="titre">Titre:</label>
+    <input type="text" id="titre" th:field="*{titre}" /><br>
+
+    <label for="description">Description:</label>
+    <input type="text" id="description" th:field="*{description}" /><br>
+
+    <label for="affiche">Affiche:</label>
+    <input type="file" id="affiche" name="afficheFile" /><br>
+
+    <div>
+        <label for="genre">Genre:</label>
+        <select id="genre" th:field="*{genre}">
+            <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.type}"></option>
+        </select>
+    </div>
+
+    <div>
+        <label for="real">Réalisateur:</label>
+        <select id="real" th:field="*{real}">
+            <option th:each="real : ${reals}" th:value="${real.id}" th:text="${real.prenom} + ' ' + ${real.nom}"></option>
+        </select>
+    </div>
+
+    <div>
+        <label>Acteurs:</label>
+        <div th:each="acteur : ${acteurs}">
+            <input type="checkbox" th:id="${'acteur-' + acteur.id}" th:name="acteurIds" th:value="${acteur.id}"
+                   th:checked="${film.acteurs != null and film.acteurs.contains(acteur)}" />
+            <label th:for="${'acteur-' + acteur.id}" th:text="${acteur.prenom} + ' ' + ${acteur.nom}" />
+        </div>
+    </div>
+
+    <button type="submit">Mettre à jour</button>
+</form>
+
+</body>
+</html>

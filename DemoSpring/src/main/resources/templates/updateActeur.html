@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Mettre à jour un Acteur</title>
+    <link rel="stylesheet" href="/css/form.css">
+</head>
+<body>
+<h1>Mettre à jour un Acteur</h1>
+<form th:action="@{/acteur/update}" th:object="${acteur}" method="post" enctype="multipart/form-data">
+    <input type="hidden" th:field="*{id}" />
+
+    <label for="nom">Nom:</label>
+    <input type="text" id="nom" th:field="*{nom}" /><br>
+
+    <label for="prenom">Prénom:</label>
+    <input type="text" id="prenom" th:field="*{prenom}" /><br>
+
+    <label for="photo">Photo:</label>
+    <input type="file" id="photo" name="photoFile" /><br>
+
+    <button type="submit">Mettre à jour</button>
+</form>
+
+</body>
+</html>

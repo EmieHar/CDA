@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1010</x>
+      <y>190</y>
+      <w>290</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>User
+--
+-id_utilisateur: Long
+-nickname: String
+-password: String
+-email: String
+--
++HashPassword(String password):String 
+
++createQuizz():void
++modifyQuizz():void
++deleteQuizz():void
++evaluateQuizz():int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>400</x>
+      <y>210</y>
+      <w>290</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>Quizz
+
+--
+-id_quizz: Long
+-titel: String
+-description:String
+-creation_date:Date
+-level:String(facile, intermédiaire, difficile)
+
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>680</x>
+      <y>260</y>
+      <w>350</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..*
+&lt; create
+m2=0..*
+created &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;330.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>490</y>
+      <w>180</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>Question
+
+--
+-id_question: Long
+-label: String
+-is_correct:boolean
+-id_quizz:long
+-choice_number:int
+
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>750</y>
+      <w>180</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Choice
+
+--
+-id_choice: Long
+-label: String
+-is_correct:boolean
+-id_question
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>370</y>
+      <w>60</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=5..15</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>650</y>
+      <w>50</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=3..5</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+</diagram>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/" >
+<head>
+    <meta charset="UTF-8">
+    <title>Détails du film</title>
+</head>
+<body>
+<h1>Détails du film:</h1>
+
+<h1 th:text="'Titre: '+${film.titre}"></h1>
+<td> <img th:src="@{'/images/' + ${film.affiche}}" alt="affiche du film" style="max-width: 100px; max-height: 100px;"/></td>
+<p th:text="'Description: '+${film.description}"></p>
+<h3 th:text="'Genre: ' + ${film.genre.type}"></h3>
+<h2 th:text="'Réalisateur: ' + ${film.real.prenom} + ' ' + ${film.real.nom}"></h2>
+<h3>Acteurs:
+    <ul>
+        <li th:each="acteur : ${film.acteurs}" th:text="${acteur.prenom} + ' ' + ${acteur.nom}"></li>
+    </ul>
+</h3>
+</body>
+</html>

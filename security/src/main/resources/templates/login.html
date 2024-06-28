@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Please Log In</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+
+<div th:if="${param.error}">
+    Invalid username and password.</div>
+<div th:if="${param.logout}">
+    You have been logged out.</div>
+<div class="container mt-5">
+    <h1 class="text-center mb-5">Login custom</h1>
+
+    <form th:action="@{/login}" method="post">
+        <div>
+            <input type="text" name="username" placeholder="Username"/>
+        </div>
+        <div>
+            <input type="password" name="password" placeholder="Password"/>
+        </div>
+        <input type="submit" value="Log in" class="btn btn-primary" />
+    </form>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
+
+</body>
+</html>

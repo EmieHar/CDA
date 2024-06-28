@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/" >
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des films</title>
+    <link rel="stylesheet" href="/css/liste.css">
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault();
+            const button = event.currentTarget;
+            const filmId = button.getAttribute('data-film-id');
+            const filmTitre = button.getAttribute('data-film-titre');
+            const filmReal = button.getAttribute('data-film-real');
+
+            const confirmation = confirm('Êtes-vous sûr de vouloir supprimer ce film : ' + filmTitre + ' réalisé par ' + filmReal + '?');
+            if (confirmation) {
+                window.location.href = '/film/delete/' + filmId;
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>Liste des films</h1>
+<div th:if="${message}" th:text="${message}" style="color: green;"></div>
+<div th:if="${error}" th:text="${error}" style="color: red;"></div>
+
+<table>
+    <tr>
+        <th>Titre</th>
+        <th>Affiche</th>
+        <th>Description</th>
+        <th>Genre</th>
+        <th>Réalisateur</th>
+        <th>Acteurs</th>
+    </tr>
+    <tr th:each="film : ${films}">
+        <td th:text="${film.titre}"></td>
+        <td> <img th:src="@{'/images/' + ${film.affiche}}" alt="affiche du film" style="max-width: 100px; max-height: 100px;"/></td>
+        <td th:text="${film.description}"></td>
+        <td th:text="${film.genre.type}"></td>
+        <td th:text="${film.real.prenom} + ' ' + ${film.real.nom}"></td>
+        <td>
+            <ul>
+                <li th:each="acteur : ${film.acteurs}" th:text="${acteur.prenom} + ' ' + ${acteur.nom}"></li>
+            </ul>
+        </td>
+        <td>
+            <!-- Bouton Modifier -->
+            <a th:href="@{/film/update/{id}(id=${film.id})}" class="btn btn-primary">Modifier</a>
+
+            <!-- Bouton Supprimer -->
+            <button class="delete-btn"
+                    th:data-film-id="${film.id}"
+                    th:data-film-titre="${film.titre}"
+                    th:data-film-real="${film.real.prenom} + ' ' + ${film.real.nom}"
+                    onclick="confirmDelete(event)">Supprimer</button>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

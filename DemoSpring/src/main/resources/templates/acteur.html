@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails de l'Acteur</title>
+    <link rel="stylesheet" href="/css/form.css">
+</head>
+<body>
+<h1>Détails de l'Acteur</h1>
+
+<div th:if="${acteur.isPresent()}">
+    <p>Nom: <span th:text="${acteur.get().nom}"></span></p>
+    <p>Prénom: <span th:text="${acteur.get().prenom}"></span></p>
+    <img th:src="@{'/images/' + ${acteur.get().photo}}" alt="photo de l'acteur" style="max-width: 100px; max-height: 100px;"/>
+</div>
+
+<div th:unless="${acteur.isPresent()}">
+    <p>L'acteur n'existe pas.</p>
+</div>
+
+</body>
+</html>
